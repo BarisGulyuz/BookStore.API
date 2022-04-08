@@ -1,0 +1,290 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\bar77\\source\\repos\\BookStore.API\\BookStore.Bussiness\\BookStore.Bussiness.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\bar77\\source\\repos\\BookStore.API\\BookStore.Bussiness\\BookStore.Bussiness.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\bar77\\source\\repos\\BookStore.API\\BookStore.Bussiness\\BookStore.Bussiness.csproj",
+        "projectName": "BookStore.Bussiness",
+        "projectPath": "C:\\Users\\bar77\\source\\repos\\BookStore.API\\BookStore.Bussiness\\BookStore.Bussiness.csproj",
+        "packagesPath": "C:\\Users\\bar77\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\bar77\\source\\repos\\BookStore.API\\BookStore.Bussiness\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\bar77\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "C:\\Users\\bar77\\source\\repos\\BookStore.API\\BookStore.Core\\BookStore.Core.csproj": {
+                "projectPath": "C:\\Users\\bar77\\source\\repos\\BookStore.API\\BookStore.Core\\BookStore.Core.csproj"
+              },
+              "C:\\Users\\bar77\\source\\repos\\BookStore.API\\BookStore.DataAccess\\BookStore.DataAccess.csproj": {
+                "projectPath": "C:\\Users\\bar77\\source\\repos\\BookStore.API\\BookStore.DataAccess\\BookStore.DataAccess.csproj"
+              },
+              "C:\\Users\\bar77\\source\\repos\\BookStore.API\\BookStore.Entities\\BookStore.Entities.csproj": {
+                "projectPath": "C:\\Users\\bar77\\source\\repos\\BookStore.API\\BookStore.Entities\\BookStore.Entities.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[11.0.0, )"
+            },
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[10.4.0, )"
+            },
+            "StackExchange.Redis": {
+              "target": "Package",
+              "version": "[2.2.88, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\bar77\\source\\repos\\BookStore.API\\BookStore.Core\\BookStore.Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\bar77\\source\\repos\\BookStore.API\\BookStore.Core\\BookStore.Core.csproj",
+        "projectName": "BookStore.Core",
+        "projectPath": "C:\\Users\\bar77\\source\\repos\\BookStore.API\\BookStore.Core\\BookStore.Core.csproj",
+        "packagesPath": "C:\\Users\\bar77\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\bar77\\source\\repos\\BookStore.API\\BookStore.Core\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\bar77\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "CloudinaryDotNet": {
+              "target": "Package",
+              "version": "[1.17.0, )"
+            },
+            "Microsoft.AspNetCore.Http.Features": {
+              "target": "Package",
+              "version": "[5.0.11, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.11, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.16.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\bar77\\source\\repos\\BookStore.API\\BookStore.DataAccess\\BookStore.DataAccess.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\bar77\\source\\repos\\BookStore.API\\BookStore.DataAccess\\BookStore.DataAccess.csproj",
+        "projectName": "BookStore.DataAccess",
+        "projectPath": "C:\\Users\\bar77\\source\\repos\\BookStore.API\\BookStore.DataAccess\\BookStore.DataAccess.csproj",
+        "packagesPath": "C:\\Users\\bar77\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\bar77\\source\\repos\\BookStore.API\\BookStore.DataAccess\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\bar77\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "C:\\Users\\bar77\\source\\repos\\BookStore.API\\BookStore.Entities\\BookStore.Entities.csproj": {
+                "projectPath": "C:\\Users\\bar77\\source\\repos\\BookStore.API\\BookStore.Entities\\BookStore.Entities.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.11, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.11, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.11, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\bar77\\source\\repos\\BookStore.API\\BookStore.Entities\\BookStore.Entities.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\bar77\\source\\repos\\BookStore.API\\BookStore.Entities\\BookStore.Entities.csproj",
+        "projectName": "BookStore.Entities",
+        "projectPath": "C:\\Users\\bar77\\source\\repos\\BookStore.API\\BookStore.Entities\\BookStore.Entities.csproj",
+        "packagesPath": "C:\\Users\\bar77\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\bar77\\source\\repos\\BookStore.API\\BookStore.Entities\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\bar77\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "C:\\Users\\bar77\\source\\repos\\BookStore.API\\BookStore.Core\\BookStore.Core.csproj": {
+                "projectPath": "C:\\Users\\bar77\\source\\repos\\BookStore.API\\BookStore.Core\\BookStore.Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

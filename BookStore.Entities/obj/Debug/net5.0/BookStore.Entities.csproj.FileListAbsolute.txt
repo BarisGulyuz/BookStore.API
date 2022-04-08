@@ -1,0 +1,15 @@
+C:\Users\bar77\source\repos\BookStore.API\BookStore.Entities\bin\Debug\net5.0\BookStore.Entities.deps.json
+C:\Users\bar77\source\repos\BookStore.API\BookStore.Entities\bin\Debug\net5.0\BookStore.Entities.dll
+C:\Users\bar77\source\repos\BookStore.API\BookStore.Entities\bin\Debug\net5.0\ref\BookStore.Entities.dll
+C:\Users\bar77\source\repos\BookStore.API\BookStore.Entities\bin\Debug\net5.0\BookStore.Entities.pdb
+C:\Users\bar77\source\repos\BookStore.API\BookStore.Entities\bin\Debug\net5.0\BookStore.Core.dll
+C:\Users\bar77\source\repos\BookStore.API\BookStore.Entities\bin\Debug\net5.0\BookStore.Core.pdb
+C:\Users\bar77\source\repos\BookStore.API\BookStore.Entities\obj\Debug\net5.0\BookStore.Entities.csproj.AssemblyReference.cache
+C:\Users\bar77\source\repos\BookStore.API\BookStore.Entities\obj\Debug\net5.0\BookStore.Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\bar77\source\repos\BookStore.API\BookStore.Entities\obj\Debug\net5.0\BookStore.Entities.AssemblyInfoInputs.cache
+C:\Users\bar77\source\repos\BookStore.API\BookStore.Entities\obj\Debug\net5.0\BookStore.Entities.AssemblyInfo.cs
+C:\Users\bar77\source\repos\BookStore.API\BookStore.Entities\obj\Debug\net5.0\BookStore.Entities.csproj.CoreCompileInputs.cache
+C:\Users\bar77\source\repos\BookStore.API\BookStore.Entities\obj\Debug\net5.0\BookStore.Entities.csproj.CopyComplete
+C:\Users\bar77\source\repos\BookStore.API\BookStore.Entities\obj\Debug\net5.0\BookStore.Entities.dll
+C:\Users\bar77\source\repos\BookStore.API\BookStore.Entities\obj\Debug\net5.0\ref\BookStore.Entities.dll
+C:\Users\bar77\source\repos\BookStore.API\BookStore.Entities\obj\Debug\net5.0\BookStore.Entities.pdb
