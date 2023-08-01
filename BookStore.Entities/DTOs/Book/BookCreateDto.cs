@@ -1,9 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookStore.Entities.DTOs.Book
 {
@@ -18,6 +13,7 @@ namespace BookStore.Entities.DTOs.Book
         public int NumberofPages { get; set; }
         public string Keywords { get; set; }
         public string Description { get; set; }
-     
+        public int TotalQuantity { get; set; }
+
     }
 }

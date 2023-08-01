@@ -1,10 +1,5 @@
 ﻿using BookStore.Entities.DTOs.Book;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookStore.Bussiness.Validation.Book
 {
@@ -17,6 +12,7 @@ namespace BookStore.Bussiness.Validation.Book
             RuleFor(x => x.Name).NotEmpty();
             RuleFor(x => x.NumberofPages).NotEmpty();
             RuleFor(x => x.Subject).NotEmpty().MaximumLength(100).MaximumLength(5000);
+            RuleFor(x => x.Image).NotNull();
         }
     }
 }

@@ -16,7 +16,6 @@ namespace Book.Store.Api.Controllers
         }
 
         [AllowAnonymous]
-        [Route("api/[controller]")]
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -24,9 +23,9 @@ namespace Book.Store.Api.Controllers
             if (result.IsSuccess) return Ok(result.Data);
             return BadRequest(result.Message);
         }
+
         [AllowAnonymous]
-        [Route("api/[controller]")]
-        [HttpGet("{id}")]
+        [HttpGet("get/{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             var result = await _categoryService.GetByIdAsync(id);

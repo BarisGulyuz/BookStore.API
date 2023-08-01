@@ -1,14 +1,14 @@
 ﻿using BookStore.Core.Entities;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookStore.Entities
 {
     public class Book : BaseEntity
     {
+        public Book()
+        {
+            OrderLines = new HashSet<OrderLine>();
+        }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public int AuthorId { get; set; }
@@ -20,5 +20,8 @@ namespace BookStore.Entities
         public string Keywords { get; set; }
         public string Description { get; set; }
         public float Price { get; set; }
+        public int TotalQuantity { get; set; }
+
+        public ICollection<OrderLine> OrderLines { get; set; }
     }
 }

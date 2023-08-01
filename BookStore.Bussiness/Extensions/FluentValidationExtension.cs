@@ -2,14 +2,12 @@
 using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookStore.Bussiness.Extensions
 {
     public static class FluentValidationExtension
     {
+        [Obsolete("No need to use it, system will automatically catch faulty thanks to the validation filter")]
         public static List<CustomValidationError> ConvertToCustomValidationErrors(this ValidationResult validationResult)
         {
             List<CustomValidationError> customValidationErrors = new();

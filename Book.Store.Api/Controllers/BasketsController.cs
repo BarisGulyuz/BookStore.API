@@ -46,14 +46,13 @@ namespace Book.Store.Api.Controllers
             return NoContent();
         }
 
-
         [HttpPost("checkout/{basketId}")]
-        public async Task<IActionResult> Checkout(OrderCreateDto orderCreateDto, string basketId)
+        public async Task<IActionResult> ConfirmOrder(OrderCreateDto orderCreateDto, string basketId)
         {
             int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            var result = await _orderService.AddWithOrderLinesAsync(orderCreateDto, basketId, userId);
-            if (result.IsSuccess) return Created("", result);
-            return BadRequest(result);
+
+            var result = await _orderService.AddOrderAsync(orderCreateDto, basketId, userId);
+            return result.IsSuccess ? Created("", result) : BadRequest(result);
         }
     }
 }

@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace BookStore.Core.Results
 {
-    public class Result
+
+    public sealed class Result : ResultBase
     {
-        public bool IsSuccess { get; set; }
-        public string Message { get; set; }
-        public List<CustomValidationError> ValidationErrors { get; set; } = new List<CustomValidationError>();
         public static Result Success()
         {
             return new Result
@@ -18,7 +12,6 @@ namespace BookStore.Core.Results
                 IsSuccess = true,
             };
         }
-
         public static Result Success(string message)
         {
             return new Result

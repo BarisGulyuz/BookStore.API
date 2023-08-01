@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace BookStore.Entities.BasketEntities
 {
-   public class Basket
+    public class Basket
     {
         public Basket()
         {
@@ -18,6 +14,5 @@ namespace BookStore.Entities.BasketEntities
         }
         public string Id { get; set; }
         public List<BasketItem> BasketItems { get; set; } = new List<BasketItem>();
-
     }
 }

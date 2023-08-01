@@ -1,15 +1,10 @@
 ﻿using BookStore.Bussiness.Abstract;
 using BookStore.Entities.DTOs.Author;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Book.Store.Api.Controllers
 {
-
     public class AuthorsController : BaseAdminController
     {
         private readonly IAuthorService _authorService;

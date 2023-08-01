@@ -1,93 +1,75 @@
 ﻿using AutoMapper;
 using BookStore.Bussiness.Abstract;
 using BookStore.Bussiness.Extensions;
+using BookStore.Core.DataAccess.Abstract;
 using BookStore.Core.Enums;
 using BookStore.Core.Results;
-using BookStore.DataAccess.Repositories.Abstract;
 using BookStore.Entities;
 using BookStore.Entities.BasketEntities;
 using BookStore.Entities.DTOs.Order;
-using BookStore.Entities.DTOs.OrderLine;
-using FluentValidation;
-using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BookStore.Bussiness.Concrete
 {
     public class OrderManager : IOrderService
     {
-        private readonly IOrderRepository _orderRepository;
-        private readonly IOrderLineService _orderLineService;
+        const int MAX_QUANTITY_PER_ITEM = 5;
+
+        private readonly IRepository<Order> _orderRepository;
+        private readonly IRepository<Book> _bookRepository;
         private readonly IBasketService _basketService;
         private readonly IMapper _mapper;
-        private readonly IValidator<OrderCreateDto> _createValidator;
 
-        public OrderManager(IOrderRepository orderRepository, IOrderLineService orderLineService, IBasketService basketService, IMapper mapper, IValidator<OrderCreateDto> createValidator)
+        public OrderManager(IRepository<Order> orderRepository, IBasketService basketService, IMapper mapper, IRepository<Book> bookRepository)
         {
             _orderRepository = orderRepository;
-            _orderLineService = orderLineService;
             _basketService = basketService;
             _mapper = mapper;
-            _createValidator = createValidator;
+            _bookRepository = bookRepository;
         }
 
-        public async Task<Result> AddWithOrderLinesAsync(OrderCreateDto orderCreateDto, string basketId, int userId)
+        public async Task<Result> AddOrderAsync(OrderCreateDto orderCreateDto, string basketId, int userId)
         {
-            var result = _createValidator.Validate(orderCreateDto);
-            if (result.IsValid)
+            Order order = _mapper.Map<Order>(orderCreateDto);
+            order.UserId = userId;
+            order.ShipmentStatus = (int)ShipmentStatusEnum.Waiting;
+            order.Status = true;
+
+            Basket basketResult = null;
+            Result validationResult = await IsOrderValid(basketId, basketResult);
+            if (validationResult.IsSuccess)
             {
-                Order order = _mapper.Map<Order>(orderCreateDto);
-                order.UserId = userId;
-                order.ShipmentStatus = (int)ShipmentStatusEnum.Waiting;
-                order.Status = true;
+                PreprareOrder(order, basketResult);
                 await _orderRepository.AddAsync(order);
 
-                var basketResult = await _basketService.GetBasketAsync(basketId);
-                if (basketResult.BasketItems.Count > 0)
-                {
-                    List<OrderLine> orderLines = new List<OrderLine>();
-                    foreach (var basket in basketResult.BasketItems)
-                    {
-                        orderLines.Add(new OrderLine
-                        {
-                            OrderId = order.Id,
-                            BookName = basket.BookName,
-                            Price = basket.Price,
-                            Quantity = basket.Quantity,
-                            Status = true
-                        });
-                    }
-                    await _orderLineService.AddOrderLinesAsync(orderLines);
-                    return Result.Success();
-                }
-                return Result.Failure("There is no basket item yet");
+                Result updateResult = await UpdateBookQuantites(order);
+
+                if (updateResult.IsSuccess)
+                    await _orderRepository.SaveChangesAsync();
+                else
+                    return updateResult;
             }
-            return Result.Failure("Validation Error", result.ConvertToCustomValidationErrors());
+            return Result.Success();
         }
 
-
-        public async Task<DataResult<List<OrderGetDto>>> GetOrdersAsync(int shipmentStatus)
+        public async Task<DataResult<List<OrderGetDto>>> GetOrdersAsync(int shipmentStatus, bool onlyActives = true)
         {
-            List<Order> orders = new();
-            switch (shipmentStatus == (int)ShipmentStatusEnum.All)
-            {
-                case true:
-                    orders = await _orderRepository.GetAllAsync(null, x => x.OrderLines, x => x.User);
-                    break;
-                default:
-                    orders = await _orderRepository.GetAllAsync(x => x.ShipmentStatus == shipmentStatus, x => x.OrderLines, x => x.User);
-                    break;
-            }
-            if (orders.Count > 0)
-            {
-                List<OrderGetDto> orderGetRetun = _mapper.Map<List<OrderGetDto>>(orders);
-                return DataResult<List<OrderGetDto>>.Success(orderGetRetun);
-            }
-            return DataResult<List<OrderGetDto>>.Failure("There is no data for this query");
+            IQueryable<Order> orders = _orderRepository.GetQueryable(withAsNoTracking: true)
+                                                      .Include(x => x.User)
+                                                      .Include(x => x.OrderLines);
 
+            orders = orders.WhereIf(x => x.ShipmentStatus == shipmentStatus, condition: shipmentStatus != (int)ShipmentStatusEnum.All);
+            orders = orders.WhereIf(x => x.Status == true, condition: onlyActives);
+
+            List<OrderGetDto> orderGetDtos = await _mapper.ProjectTo<OrderGetDto>(orders).ToListAsync();
+
+            if (orderGetDtos.Count > 0)
+                return DataResult<List<OrderGetDto>>.Success(orderGetDtos);
+
+            return DataResult<List<OrderGetDto>>.Failure("There is no data for this query");
         }
 
         public async Task<Result> DeleteAsync(int id)
@@ -95,11 +77,68 @@ namespace BookStore.Bussiness.Concrete
             Order order = await _orderRepository.GetAsync(x => x.Id == id);
             if (order != null)
             {
-                await _orderRepository.DeleteAsync(order);
+                await _orderRepository.DeleteAsync(order, autoSave: true);
                 return Result.Success();
             }
             return Result.Failure("There is no data for this query");
+
         }
 
+        #region Private Methods
+
+        private static void PreprareOrder(Order order, Basket basketResult)
+        {
+            List<OrderLine> orderLines = new List<OrderLine>();
+            foreach (var basket in basketResult.BasketItems)
+            {
+                orderLines.Add(new OrderLine
+                {
+                    OrderId = order.Id,
+                    BookName = basket.BookName,
+                    Price = basket.Price,
+                    Quantity = basket.Quantity,
+                    Status = true
+                });
+            }
+            order.OrderLines = orderLines;
+        }
+        private async Task<Result> UpdateBookQuantites(Order order)
+        {
+            Result result = new Result();
+            foreach (var orderItem in order.OrderLines)
+            {
+                var targetBook = await _bookRepository.GetAsync(b => b.Id == orderItem.BookId);
+                if (targetBook.TotalQuantity >= orderItem.Quantity)
+                {
+                    targetBook.TotalQuantity -= orderItem.Quantity;
+                }
+                else
+                {
+                    result.SetError($"We only have {targetBook.TotalQuantity} of the book {targetBook.Name} right now");
+                    break;
+                }
+            }
+
+            return result;
+        }
+        private async Task<Result> IsOrderValid(string basketId, Basket basket)
+        {
+            Result result = new Result();
+
+            basket = await _basketService.GetBasketAsync(basketId);
+
+            if (!(basket != null && basket.BasketItems.Count > 0))
+                result.SetError($"There no basket item for {basketId}");
+            else
+            {
+                bool isItemsCountsValid = basket.BasketItems.Any(x => x.Quantity > MAX_QUANTITY_PER_ITEM);
+                if (!isItemsCountsValid)
+                    result.SetError($"Item quantities cannot be bigger than {MAX_QUANTITY_PER_ITEM}");
+            }
+
+            return result;
+        }
+
+        #endregion
     }
 }

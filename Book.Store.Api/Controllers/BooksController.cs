@@ -1,11 +1,7 @@
 ﻿using BookStore.Bussiness.Abstract;
 using BookStore.Entities.DTOs.Book;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Book.Store.Api.Controllers
@@ -20,13 +16,12 @@ namespace Book.Store.Api.Controllers
             _bookService = bookService;
         }
 
-
         [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetAll(int categoryId, int authorId, int pageSize = 10, int pageNumber = 1)
         {
             var result = await _bookService.GetAllAsync(categoryId, authorId, pageSize, pageNumber);
-            return result.IsSuccess ? Ok(result.Data) : BadRequest(result);
+            return result.IsSuccess ? Ok(result) : BadRequest(result);
         }
 
         [AllowAnonymous]
@@ -50,6 +45,7 @@ namespace Book.Store.Api.Controllers
             var result = await _bookService.UpdateAsync(bookUpdateDto);
             return result.IsSuccess ? NoContent() : BadRequest(result);
         }
+
         [HttpPut("delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {

@@ -6,9 +6,9 @@ using BookStore.Bussiness.Validation.Author;
 using BookStore.Bussiness.Validation.Book;
 using BookStore.Bussiness.Validation.Category;
 using BookStore.Bussiness.Validation.User;
+using BookStore.Core.DataAccess.Abstract;
+using BookStore.Core.DataAccess.Concrete;
 using BookStore.Core.Helpers.CloudinaryHelper;
-using BookStore.DataAccess.Repositories.Abstract;
-using BookStore.DataAccess.Repositories.Concrete;
 using BookStore.Entities.DTOs.Author;
 using BookStore.Entities.DTOs.Book;
 using BookStore.Entities.DTOs.Category;
@@ -25,28 +25,14 @@ namespace BookStore.Bussiness
     {
         public static IServiceCollection AddApplicationDependencies(this IServiceCollection services)
         {
+            services.AddScoped(typeof(IRepository<>), typeof(AppRepository<>));
 
             services.AddScoped<IAuthService, AuthManager>();
-            services.AddScoped<IUserRepository, EfUSerRepository>();
-
             services.AddScoped<ICategoryService, CategoryManager>();
-            services.AddScoped<ICategoryRepository, EfCategoryRepository>();
-
             services.AddScoped<IAuthorService, AuthorManager>();
-            services.AddScoped<IAuthorRepository, EfAuthorRepository>();
-
             services.AddScoped<IBookService, BookManager>();
-            services.AddScoped<IBookRepository, EfBookRepository>();
-
-            services.AddScoped<IRoleRepository, EfRoleRepository>();
-
             services.AddScoped<IBasketService, BasketManager>();
-
             services.AddScoped<IOrderService, OrderManager>();
-            services.AddScoped<IOrderRepository, EfOrderRepository>();
-
-            services.AddScoped<IOrderLineService, OrderLineManager>();
-            services.AddScoped<IOrderLineRepository, EfOrderLineRepository>();
 
 
             //MAPPINGS
@@ -74,11 +60,8 @@ namespace BookStore.Bussiness
             services.AddTransient<IValidator<OrderCreateDto>, OrderCreateValidator>();
             services.AddTransient<IValidator<OrderUpdateDto>, OrderUpdateValidator>();
 
-           
-
             //CLOUDINARY
-            services.AddScoped<ICloudinary, CloudinaryService>();
-
+            services.AddScoped<IFileService, CloudinaryService>();
 
             //REDIS FOR BASKET
             services.AddSingleton<IConnectionMultiplexer>(opt =>
